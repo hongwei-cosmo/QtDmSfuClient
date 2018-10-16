@@ -13,11 +13,12 @@ public:
   explicit Controller(QObject *parent = nullptr);
   ~Controller();
 
-  void connect();
+
 
 Q_SIGNALS:
 
 public Q_SLOTS:
+  void connect(const std::string &sfuUrl, const std::string &clientId);
 
 private:
   QWebRTCProxy *webrtcProxy_;

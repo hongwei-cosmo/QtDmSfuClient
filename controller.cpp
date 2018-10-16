@@ -14,3 +14,8 @@ Controller::~Controller() {
   delete webrtcProxy_;
   delete sfuSignaling_;
 }
+
+void Controller::connect(const std::string& sfuUrl, const std::string& clientId)
+{
+  qDebug("%s is called url=%s, id=%s", __func__, sfuUrl.c_str(), clientId.c_str());
+}
