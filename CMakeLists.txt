@@ -60,7 +60,9 @@ set( CMAKE_AUTORCC ON )
 
 add_subdirectory( ${CMAKE_CURRENT_LIST_DIR}/qt-dm-sfu-client-lib )
 
-add_executable( QtDmSfuClient main.cpp qml.qrc )
+set( sources controller.cpp main.cpp )
+set( headers controller.h )
+add_executable( QtDmSfuClient ${sources} ${headers} qml.qrc )
 target_link_libraries( QtDmSfuClient
   Qt5::Widgets
   Qt5::Quick
