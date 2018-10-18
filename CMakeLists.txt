@@ -43,7 +43,7 @@ else( UNIX )
   endif( )
 endif()
 
-find_package( Qt5 COMPONENTS Quick Widgets REQUIRED )
+find_package( Qt5 COMPONENTS Quick Widgets WebSockets REQUIRED )
 
 # NOTE ALEX: this should not be needed, double check on linux
 if( UNIX AND NOT APPLE )
@@ -66,6 +66,7 @@ add_executable( QtDmSfuClient ${sources} ${headers} qml.qrc )
 target_link_libraries( QtDmSfuClient
   Qt5::Widgets
   Qt5::Quick
+  Qt5::WebSockets
   ${WEBRTC_LIBRARIES}
   QtDmSfuClientLib
  )

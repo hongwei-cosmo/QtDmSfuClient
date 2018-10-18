@@ -1,10 +1,12 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include "qt_sfu_signaling.h"
+
 #include <QObject>
+#include <QWebSocket>
 
 class QWebRTCProxy;
-class QSfuSignaling;
 
 class Controller : public QObject
 {
@@ -13,16 +15,21 @@ public:
   explicit Controller(QObject *parent = nullptr);
   ~Controller();
 
-
-
 Q_SIGNALS:
 
 public Q_SLOTS:
-  void connect(const std::string &sfuUrl, const std::string &clientId);
+  void connectSfu(const std::string &sfuUrl, const std::string &clientId);
 
-private:
-  QWebRTCProxy *webrtcProxy_;
-  QSfuSignaling *sfuSignaling_;
+private Q_SLOTS:
+  void onConnectedSfu();
+  void onDisconnectedSfu();
+  void onSfuMessageReceived(const QString &message);
+  void onSslErrors(const QList<QSslError> &errors);
+
+  private:
+    QWebRTCProxy *webrtcProxy_;
+  QSfuSignaling sfuSignaling_;
+  QWebSocket webSocket_;
 };
 
 #endif // CONTROLLER_H
