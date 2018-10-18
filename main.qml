@@ -26,6 +26,9 @@ Window {
       x: 177
       y: 623
       text: qsTr("Button")
-      onClicked: connectSfu("aaa", "bbb");
+      onClicked: {
+          console.log("Button pressed");
+          connectSfu("aaa", "bbb");
+      }
   }
 }

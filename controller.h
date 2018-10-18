@@ -8,7 +8,7 @@
 
 class QWebRTCProxy;
 
-class Controller : public QObject
+class Controller : public QSfuSignaling
 {
   Q_OBJECT
 public:
@@ -19,16 +19,18 @@ Q_SIGNALS:
 
 public Q_SLOTS:
   void connectSfu(const std::string &sfuUrl, const std::string &clientId);
+  void disconnectSfu();
 
 private Q_SLOTS:
   void onConnectedSfu();
   void onDisconnectedSfu();
-  void onSfuMessageReceived(const QString &message);
+  void onReceivedSfuMessage(const QString &message);
   void onSslErrors(const QList<QSslError> &errors);
+  void onSendMessgeToSfu(const std::string &message);
 
-  private:
-    QWebRTCProxy *webrtcProxy_;
-  QSfuSignaling sfuSignaling_;
+
+private:
+  QWebRTCProxy *webrtcProxy_;
   QWebSocket webSocket_;
 };
 
