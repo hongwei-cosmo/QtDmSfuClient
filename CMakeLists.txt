@@ -2,6 +2,14 @@ cmake_minimum_required( VERSION 3.2.0 FATAL_ERROR )
 project( QtDmSfuClient )
 
 set( BUILD_SHARED_LIBS True )
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if (WIN32)
+  # Custom source list for Windows Desktop
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+endif()
 
 find_package( libwebrtc REQUIRED )
 find_package( QtWebrtc  REQUIRED )

@@ -28,6 +28,7 @@ Controller::Controller(QObject *parent) :
   connect(&webSocket_, &QWebSocket::disconnected, this, &Controller::onDisconnectedSfu);
   connect(&webSocket_, &QWebSocket::textMessageReceived, this, &Controller::onReceivedSfuMessage);
   connect(&webSocket_, &QWebSocket::sslErrors, this, &Controller::onSslErrors);
+  connect(&webSocket_, &QWebSocket::stateChanged, this, &Controller::onStateChanged);
 }
 
 Controller::~Controller() {
@@ -61,6 +62,11 @@ void Controller::onDisconnectedSfu()
 void Controller::onReceivedSfuMessage(const QString& message)
 {
   gotMsgFromSfu(message.toStdString());
+}
+
+void Controller::onStateChanged(QAbstractSocket::SocketState state)
+{
+  qDebug("%s is called with error=%d", __func__, state);
 }
 
 void Controller::onSslErrors(const QList<QSslError> &errors)
